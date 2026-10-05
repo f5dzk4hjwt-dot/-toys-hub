@@ -1,0 +1,13 @@
+<!doctype html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>ToyHub Admin</title>
+<style>body{font-family:Arial;margin:0;background:#f5f6f8}.wrap{max-width:1100px;margin:auto;padding:20px}input,button{padding:12px}table{width:100%;background:#fff;border-collapse:collapse}td,th{padding:10px;border-bottom:1px solid #ddd;text-align:left}.paid{color:green;font-weight:bold}</style></head>
+<body><div class="wrap"><h1>ToyHub Orders</h1><input id="key" placeholder="Admin key"><button onclick="load()">Load orders</button><div id="out"></div></div>
+<script>
+async function load(){
+ const key=document.getElementById("key").value;
+ const r=await fetch("/api/admin/orders",{headers:{"x-admin-key":key}});
+ const d=await r.json(); if(!r.ok){document.getElementById("out").textContent=d.error;return}
+ document.getElementById("out").innerHTML=`<table><tr><th>Reference</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr>`+
+ d.map(o=>`<tr><td>${o.reference}</td><td>${o.customer}<br>${o.phone}<br>${o.email}</td><td>$${Number(o.amount).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</td><td class="${o.status==='paid'?'paid':''}">${o.status}</td><td>${new Date(o.createdAt).toLocaleString()}</td></tr>`).join("")+"</table>";
+}
+</script></body></html>

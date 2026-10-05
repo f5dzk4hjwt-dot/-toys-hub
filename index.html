@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toys Hub — Online Toy Store</title>
+<style>
+:root{--navy:#163f69;--blue:#087bea;--yellow:#ffd43b;--green:#20ad52;--ink:#263238;--muted:#718096;--bg:#f7f9fc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg)}
+.top{height:76px;background:var(--navy);color:#fff;display:flex;align-items:center;padding:0 max(18px,calc((100% - 1240px)/2));gap:20px;position:sticky;top:0;z-index:20}
+.menu{font-size:29px}.logo{font-size:27px;font-weight:900;letter-spacing:-1px;background:#fff;color:var(--navy);padding:6px 11px;border-radius:6px}.logo span{color:#f1b900}
+.nav{display:flex;gap:22px;margin-left:18px;font-weight:700;font-size:14px}.nav a{color:#fff;text-decoration:none}
+.icons{margin-left:auto;display:flex;gap:18px;font-size:23px;align-items:center}.cart{position:relative;cursor:pointer}.badge{position:absolute;top:-10px;right:-12px;background:var(--yellow);color:#222;border-radius:50%;font-size:11px;padding:3px 6px;font-weight:800}
+.searchbar{background:var(--blue);padding:15px max(18px,calc((100% - 1240px)/2));display:flex;gap:10px}.searchbar input{flex:1;border:0;padding:14px 18px;font-size:16px;border-radius:7px}.searchbar button{border:0;background:#fff;color:var(--navy);width:52px;border-radius:7px;font-size:24px}
+.hero{background:linear-gradient(110deg,#eaf5ff,#fff8d9);padding:48px max(18px,calc((100% - 1240px)/2));display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}.hero h1{font-size:clamp(38px,5vw,66px);line-height:.98;margin:0 0 18px;color:var(--navy);letter-spacing:-3px}.hero h1 span{color:var(--blue)}.hero p{font-size:19px;color:#58677a;max-width:560px;line-height:1.55}.hero .cta{display:inline-block;margin-top:12px;background:var(--green);color:#fff;text-decoration:none;padding:14px 24px;border-radius:28px;font-weight:800}.hero-art{display:grid;place-items:center;font-size:150px;min-height:260px}
+main{max-width:1240px;margin:auto;padding:34px 18px}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.section-title h2{margin:0;font-size:30px;color:var(--navy)}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:15px}.toolbar select{padding:10px;border:1px solid #d9e0e8;border-radius:6px;background:#fff}
+.categories{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:40px}.cat{background:#fff;border-radius:12px;padding:18px;text-align:center;border:1px solid #e7edf3;text-decoration:none;color:var(--navy);font-weight:800;box-shadow:0 3px 12px #00000008}.cat b{display:block;font-size:38px;margin-bottom:7px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}.card{border:1px solid #e7edf3;border-radius:12px;padding:12px;background:#fff;box-shadow:0 5px 18px #0000000a;transition:.2s}.card:hover{transform:translateY(-3px);box-shadow:0 8px 25px #00000012}.pic{height:205px;display:grid;place-items:center;background:linear-gradient(135deg,#f5f8fc,#fff);border-radius:9px;font-size:80px}.name{font-weight:800;font-size:17px;line-height:1.3;margin:14px 2px 7px}.price{font-size:22px;font-weight:900;color:#205a8d;margin:8px 2px 14px}.btn{width:100%;padding:12px;border:0;border-radius:25px;background:var(--green);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.btn:hover{filter:brightness(.94)}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:35px 0}.trust div{background:#fff;border:1px solid #e7edf3;border-radius:10px;padding:18px;font-weight:700}.trust small{display:block;color:var(--muted);font-weight:400;margin-top:4px}
+footer{margin-top:40px;background:var(--navy);color:#fff;padding:38px max(18px,calc((100% - 1240px)/2));display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}footer h3{margin-top:0}.foot-muted{color:#cbd8e5;line-height:1.6}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:30;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.box{background:#fff;width:min(650px,100%);max-height:90vh;overflow:auto;border-radius:14px;padding:24px}.close{float:right;border:0;background:none;font-size:28px;cursor:pointer}.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee}.total{font-size:22px;font-weight:900;margin:14px 0}.form input,.form textarea{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #ccd5df;border-radius:7px;font:inherit}.pay{background:#087bea}.notice{background:#eef7ff;padding:12px;border-radius:7px;font-size:14px;margin-bottom:12px}.empty{text-align:center;padding:40px}
+@media(max-width:900px){.nav{display:none}.hero{grid-template-columns:1fr}.hero-art{min-height:180px}.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.categories{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr);gap:12px}.pic{height:150px;font-size:58px}.name{font-size:14px}.price{font-size:18px}.trust{grid-template-columns:1fr}footer{grid-template-columns:1fr}.hero{padding-top:32px;padding-bottom:32px}.hero h1{letter-spacing:-2px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="menu">☰</div>
+  <div class="logo">TOYS <span>HUB</span></div>
+  <nav class="nav">
+    <a href="#shop">Shop</a><a href="#categories">Categories</a><a href="#why">Why Toys Hub?</a>
+  </nav>
+  <div class="icons"><span>♡</span><span class="cart" onclick="openCart()">🛒<b id="badge" class="badge">0</b></span></div>
+</header>
+<div class="searchbar"><input id="search" placeholder="Search products..." oninput="render()"><button>⌕</button></div>
+
+<section class="hero">
+  <div>
+    <h1>Big fun.<br><span>Big adventures.</span></h1>
+    <p>Discover exciting racing cars, trucks, supercars, bikes, planes and collectible toys for kids and collectors.</p>
+    <a class="cta" href="#shop">Shop Toys →</a>
+  </div>
+  <div class="hero-art">🏎️ ✈️</div>
+</section>
+<section id="categories" style="max-width:1240px;margin:auto;padding:28px 18px 0">
+  <div class="section-title"><h2>Shop by Category</h2></div>
+  <div class="categories">
+    <a class="cat" href="#shop" onclick="setCategory('Cars')"><b>🚗</b>Cars</a>
+    <a class="cat" href="#shop" onclick="setCategory('Trucks')"><b>🚚</b>Trucks</a>
+    <a class="cat" href="#shop" onclick="setCategory('Supercars')"><b>🏎️</b>Supercars</a>
+    <a class="cat" href="#shop" onclick="setCategory('Bikes')"><b>🏍️</b>Bikes</a>
+    <a class="cat" href="#shop" onclick="setCategory('Planes')"><b>✈️</b>Planes</a>
+  </div>
+</section>
+<main id="shop">
+<div class="section-title"><h2>Featured Toys</h2></div><div class="toolbar"><span>Popular picks for kids & collectors</span><select id="category" onchange="render()"><option>All categories</option></select></div>
+<div id="grid" class="grid"></div>
+</main>
+
+<section id="why" style="max-width:1240px;margin:auto;padding:0 18px 20px">
+  <div class="trust">
+    <div>🚚 Fast delivery<small>Simple $30 delivery fee</small></div>
+    <div>🔒 Secure checkout<small>Payments handled through Paystack</small></div>
+    <div>⭐ Toys kids love<small>Cars, planes, bikes & collectibles</small></div>
+  </div>
+</section>
+<footer>© 2026 Toys Hub · Secure Paystack checkout · $30 delivery fee · Customer support<footer>
+  <div><h3>TOYS HUB</h3><div class="foot-muted">Fun toys, racing cars and collectibles for kids and collectors.</div></div>
+  <div><h3>Shop</h3><div class="foot-muted">Cars<br>Trucks<br>Supercars<br>Bikes<br>Planes</div></div>
+  <div><h3>Delivery</h3><div class="foot-muted">$30 delivery fee<br>Secure Paystack checkout<br>www.toyhubs.com</div></div>
+</footer>
+
+<div id="modal" class="modal">
+<div class="box">
+<button class="close" onclick="closeCart()">×</button><h2>Checkout</h2>
+<div id="cartItems"></div><div id="subtotal" class="total"></div><div class="row"><span>Delivery fee</span><b>$30.00</b></div><div id="total" class="total"></div>
+<div class="form">
+<input id="name" placeholder="Full name">
+<input id="email" type="email" placeholder="Email address">
+<input id="phone" placeholder="Phone number">
+<textarea id="address" rows="3" placeholder="Delivery address"></textarea>
+</div>
+<div class="notice">You will be redirected to Paystack to complete payment by card, bank transfer, USSD or other available channels.</div>
+<button id="payBtn" class="btn pay" onclick="pay()">Proceed to Paystack</button>
+</div></div>
+
+<script>
+let products=[],cart=[];
+const DELIVERY_FEE=30;
+const money=n=>"$"+Number(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+
+async function load(){
+  products=await fetch("/api/products").then(r=>r.json());
+  const cats=[...new Set(products.map(p=>p.category))];
+  document.getElementById("category").innerHTML='<option>All categories</option>'+cats.map(c=>`<option>${c}</option>`).join("");
+  render();
+}
+function setCategory(c){document.getElementById("category").value=c;render()}\nfunction render(){
+  let q=document.getElementById("search").value.toLowerCase(), c=document.getElementById("category").value;
+  let list=products.filter(p=>p.name.toLowerCase().includes(q)&&(c==="All categories"||p.category===c));
+  document.getElementById("grid").innerHTML=list.length?list.map(p=>`
+  <article class="card">
+    <div class="pic">${p.emoji}</div>
+    <div class="name">${p.name}</div>
+    <div class="price">${money(p.price)}</div>
+    <button class="btn" onclick="add(${p.id})">🛒 Add to Cart</button>
+  </article>`).join(""):'<div class="empty">No products found.</div>';
+}
+function add(id){let p=products.find(x=>x.id===id),i=cart.find(x=>x.id===id);i?i.qty++:cart.push({...p,qty:1});updateBadge();openCart()}
+function updateBadge(){document.getElementById("badge").textContent=cart.reduce((s,p)=>s+p.qty,0)}
+function openCart(){
+  document.getElementById("modal").classList.add("show");
+  let el=document.getElementById("cartItems");
+  el.innerHTML=cart.length?cart.map(p=>`<div class="row"><span>${p.name} × ${p.qty}</span><b>${money(p.price*p.qty)}</b></div>`).join(""):"<p>Your cart is empty.</p>";
+  const subtotal=cart.reduce((s,p)=>s+p.price*p.qty,0);
+  document.getElementById("subtotal").textContent="Subtotal: "+money(subtotal);
+  document.getElementById("total").textContent="Total: "+money(subtotal+DELIVERY_FEE);
+}
+function closeCart(){document.getElementById("modal").classList.remove("show")}
+async function pay(){
+  if(!cart.length)return alert("Add a product first.");
+  const customer=document.getElementById("name").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const phone=document.getElementById("phone").value.trim();
+  const address=document.getElementById("address").value.trim();
+  if(!customer||!email||!phone||!address)return alert("Please complete all customer and delivery details.");
+  const btn=document.getElementById("payBtn");btn.disabled=true;btn.textContent="Starting secure checkout...";
+  try{
+    const r=await fetch("/api/paystack/initialize",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({email,customer,phone,address,items:cart.map(x=>({id:x.id,qty:x.qty}))})});
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.error||"Payment could not be started.");
+    localStorage.setItem("toyhub_last_reference",data.reference);
+    window.location.href=data.authorization_url;
+  }catch(e){alert(e.message);btn.disabled=false;btn.textContent="Proceed to Paystack"}
+}
+load();
+</script>
+</body>
+</html>
